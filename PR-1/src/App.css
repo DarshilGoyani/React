@@ -98,6 +98,7 @@
 .result-text {
   font-weight: bold;
   font-size: 1.2rem;
+  z-index: 99;
 }
 
 /* Reset Button */
