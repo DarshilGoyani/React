@@ -5,18 +5,17 @@ const Header: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <header className="w-full text-[14px]">
+    <header className="w-full text-[14px] bg-white shadow-sm sticky-top">
 
       {/* Top */}
-      <div className="bg-gray-100 py-1">
-        <div className="max-w-7xl mx-auto flex justify-between px-4">
-          <p className="font-semibold">
+      <div className="bg-light py-1 border-bottom">
+        <div className="container d-flex justify-content-between align-items-center">
+          <p className="mb-0 text-p-gray font-semibold">
             Super Value Deals - Save more with coupons
           </p>
 
-          <div className="hidden md:flex items-center gap-2">
-            <img src="/images/english.svg" alt="" className="w-5" />
-            <select className="bg-gray-100 border-none outline-none text-gray-600 hover:text-green-600">
+          <div className="d-none d-md-flex align-items-center gap-2">
+            <select className="form-select form-select-sm border-0 bg-transparent text-p-gray">
               <option>English</option>
               <option>Deutsch</option>
             </select>
@@ -25,59 +24,54 @@ const Header: React.FC = () => {
       </div>
 
       {/* Middle */}
-      <div className="py-3 border-b">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4">
+      <div className="py-3 border-bottom">
+        <div className="container d-flex justify-content-between align-items-center">
 
           {/* Logo */}
-          <img src="/images/freshcart-logo.svg" className="h-10" />
+          <div className="navbar-brand">
+             <h2 className="fw-bold mb-0 text-theme-green">FreshCart</h2>
+          </div>
 
           {/* Search */}
-          <div className="hidden lg:flex items-center gap-2">
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex border rounded-lg px-3 py-2"
-            >
+          <div className="d-none d-lg-flex align-items-center gap-3 flex-grow-1 mx-5">
+            <div className="input-group">
               <input
                 type="text"
                 placeholder="Search for products"
-                className="w-[453px] text-[14px] outline-none"
+                className="form-control"
               />
-              <button>
-                <i className="ri-search-line"></i>
+              <button className="btn btn-success bg-theme-green border-0">
+                🔍
               </button>
-            </form>
-
-            <button className="border px-3 py-2 rounded-lg text-gray-500">
-              📍 Location
-            </button>
+            </div>
           </div>
 
           {/* Icons */}
-          <div className="flex items-center gap-4">
+          <div className="d-flex align-items-center gap-4">
             
             {/* Wishlist */}
-            <div className="relative">
+            <div className="position-relative cursor-pointer">
               ❤️
-              <span className="absolute text-[10px] bg-green-600 text-white px-1 rounded-full top-[-2px] right-[12px]">
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-theme-green">
                 4
               </span>
             </div>
 
             {/* User */}
-            <button onClick={() => setIsModalOpen(true)}>👤</button>
+            <button className="btn p-0 border-0" onClick={() => setIsModalOpen(true)}>👤</button>
 
             {/* Cart */}
-            <div className="relative">
+            <div className="position-relative cursor-pointer">
               🛒
-              <span className="absolute text-[10px] bg-green-600 text-white px-1 rounded-full top-[-2px] right-[-6px]">
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-theme-green">
                 4
               </span>
             </div>
 
             {/* Mobile Menu */}
             <button
-              className="lg:hidden"
-              onClick={() => setIsMenuOpen(true)}
+              className="d-lg-none btn border-0"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               ☰
             </button>
@@ -86,119 +80,70 @@ const Header: React.FC = () => {
       </div>
 
       {/* Navbar */}
-      <div className="hidden lg:block border-b">
-        <div className="max-w-7xl mx-auto flex items-center px-4">
+      <nav className="d-none d-lg-block border-bottom bg-white py-2">
+        <div className="container d-flex align-items-center">
 
           {/* Button */}
-          <button className="px-6 py-2 bg-green-600 text-white rounded mr-6 hover:text-green-200">
+          <button className="btn bg-theme-green text-white px-4 me-4 border-0">
             All Department
           </button>
 
           {/* Menu */}
-          <nav className="flex gap-6 font-semibold">
-
-            <div className="group relative">
-              <a href="/">Home</a>
-            </div>
-
-            <div className="group relative">
-              <a href="/shop">Shop</a>
-            </div>
-
-            <div className="group relative">
-              <a href="/stores">Stores</a>
-            </div>
-
-            {/* Mega Menu */}
-            <div className="group relative">
-              <button className="flex items-center gap-1">
-                Mega Menu ⌄
-              </button>
-
-              <div className="absolute hidden group-hover:block top-full left-0 w-[800px] bg-white shadow-lg p-6">
-                <div className="grid grid-cols-4 gap-4 text-[14px]">
-
-                  <div>
-                    <h6 className="text-green-600 font-semibold mb-2">
-                      Dairy
-                    </h6>
-                    <ul>
-                      <li className="hover:bg-gray-100 p-1">Butter</li>
-                      <li className="hover:bg-gray-100 p-1">Milk</li>
-                      <li className="hover:bg-gray-100 p-1">Cheese</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h6 className="text-green-600 font-semibold mb-2">
-                      Snacks
-                    </h6>
-                    <ul>
-                      <li className="hover:bg-gray-100 p-1">Noodles</li>
-                      <li className="hover:bg-gray-100 p-1">Soup</li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            {/* Submenu */}
-            <div className="group relative">
-              <button>Pages ⌄</button>
-
-              <div className="absolute hidden group-hover:block top-full bg-white shadow rounded p-2 min-w-[200px]">
-                <a className="block px-3 py-1 hover:bg-gray-100">Blog</a>
-                <a className="block px-3 py-1 hover:bg-gray-100">About</a>
-              </div>
-            </div>
-
-          </nav>
+          <ul className="nav font-semibold">
+            <li className="nav-item">
+              <a className="nav-link text-dark hover-text-theme-green" href="/">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-dark hover-text-theme-green" href="/shop">Shop</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-dark hover-text-theme-green" href="/stores">Stores</a>
+            </li>
+            <li className="nav-item dropdown">
+               <a className="nav-link text-dark hover-text-theme-green dropdown-toggle" href="#">Pages</a>
+            </li>
+          </ul>
         </div>
-      </div>
+      </nav>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="modal show d-block" tabIndex={-1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 shadow">
+              <div className="modal-header border-0">
+                <h5 className="modal-title fw-bold">Sign Up</h5>
+                <button type="button" className="btn-close" onClick={() => setIsModalOpen(false)}></button>
+              </div>
+              <div className="modal-body p-4">
+                <form className="d-flex flex-col gap-3">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="form-control mb-3"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="form-control mb-3"
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="form-control mb-3"
+                  />
 
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsModalOpen(false)}
-          ></div>
+                  <p className="text-muted small">
+                    By Signup, you agree to{" "}
+                    <span className="text-theme-green">Terms</span>
+                  </p>
 
-          <div className="bg-white p-6 rounded-lg z-10 w-96">
-
-            <div className="flex justify-between mb-4">
-              <h2 className="font-semibold">Sign Up</h2>
-              <button onClick={() => setIsModalOpen(false)}>✕</button>
+                  <button className="btn bg-theme-green text-white w-100 py-2 border-0 mt-2">
+                    Sign Up
+                  </button>
+                </form>
+              </div>
             </div>
-
-            <form className="flex flex-col gap-3">
-              <input
-                type="text"
-                placeholder="Name"
-                className="border p-2 rounded text-[14px]"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="border p-2 rounded text-[14px]"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="border p-2 rounded text-[14px]"
-              />
-
-              <p className="text-[12px]">
-                By Signup, you agree to{" "}
-                <span className="text-green-600">Terms</span>
-              </p>
-
-              <button className="bg-green-600 text-white py-2 rounded">
-                Sign Up
-              </button>
-            </form>
           </div>
         </div>
       )}
