@@ -1,17 +1,4 @@
-import React from 'react';
-
-// Define Props Interface
-interface CardProps {
-  data: {
-    type: 'gold' | 'monster';
-    value: number;
-    icon: string;
-  };
-  flipped: boolean;
-  onFlip: () => void;
-}
-
-const Card: React.FC<CardProps> = ({ data, flipped, onFlip }) => {
+const Card = ({ data, flipped, onFlip }: any) => {
   return (
     <div className={`card ${flipped ? 'flipped' : ''}`} onClick={onFlip}>
       <div className="card-inner">

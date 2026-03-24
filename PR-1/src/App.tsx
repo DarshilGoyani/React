@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from './card';
 import './App.css';
 
-// Interface for Card Object
-interface CardData {
-  id: number;
-  type: 'gold' | 'monster';
-  value: number;
-  icon: string;
-  flipped: boolean;
-}
+const App = () => {
+  const [balance, setBalance] = useState(0);
+  const [msg, setMsg] = useState("Ek card chuno! Monster se bacho.");
 
-const App: React.FC = () => {
-  const [balance, setBalance] = useState<number>(0);
-  const [msg, setMsg] = useState<string>("Ek card chuno! Monster se bacho.");
-
-  const initialCards: CardData[] = [
+  const initialCards = [
     { id: 1, type: 'gold', value: 500, icon: '💰', flipped: false },
     { id: 2, type: 'gold', value: 200, icon: '🪙', flipped: false },
     { id: 3, type: 'monster', value: 0, icon: '👹', flipped: false },
@@ -23,11 +14,11 @@ const App: React.FC = () => {
   ];
 
   // Shuffle logic
-  const [cards, setCards] = useState<CardData[]>(() => 
+  const [cards, setCards] = useState(() => 
     [...initialCards].sort(() => Math.random() - 0.5)
   );
 
-  const handleCardClick = (id: number): void => {
+  const handleCardClick = (id: any) => {
     const cardIndex = cards.findIndex(c => c.id === id);
     if (cardIndex === -1 || cards[cardIndex].flipped) return;
 
