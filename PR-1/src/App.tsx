@@ -8,6 +8,7 @@ interface CardData {
   type: 'gold' | 'monster';
   value: number;
   icon: string;
+  flipped: boolean;
 }
 
 const App: React.FC = () => {
@@ -15,22 +16,33 @@ const App: React.FC = () => {
   const [msg, setMsg] = useState<string>("Ek card chuno! Monster se bacho.");
 
   const initialCards: CardData[] = [
-    { id: 1, type: 'gold', value: 500, icon: '💰' },
-    { id: 2, type: 'gold', value: 200, icon: '🪙' },
-    { id: 3, type: 'monster', value: 0, icon: '👹' },
-    { id: 4, type: 'gold', value: 1000, icon: '💎' },
+    { id: 1, type: 'gold', value: 500, icon: '💰', flipped: false },
+    { id: 2, type: 'gold', value: 200, icon: '🪙', flipped: false },
+    { id: 3, type: 'monster', value: 0, icon: '👹', flipped: false },
+    { id: 4, type: 'gold', value: 1000, icon: '💎', flipped: false },
   ];
 
   // Shuffle logic
-  const [cards] = useState<CardData[]>([...initialCards].sort(() => Math.random() - 0.5));
+  const [cards, setCards] = useState<CardData[]>(() => 
+    [...initialCards].sort(() => Math.random() - 0.5)
+  );
 
-  const handleCardClick = (type: 'gold' | 'monster', value: number): void => {
-    if (type === 'monster') {
+  const handleCardClick = (id: number): void => {
+    const cardIndex = cards.findIndex(c => c.id === id);
+    if (cardIndex === -1 || cards[cardIndex].flipped) return;
+
+    const clickedCard = cards[cardIndex];
+    const newCards = [...cards];
+    newCards[cardIndex] = { ...clickedCard, flipped: true };
+    
+    setCards(newCards);
+
+    if (clickedCard.type === 'monster') {
       setBalance(0);
       setMsg("OH NO! Monster ne balance zero kar diya! 👹");
     } else {
-      setBalance(prev => prev + value);
-      setMsg(`Mubarak! Aapne ₹${value} jeete! 💸`);
+      setBalance(prev => prev + clickedCard.value);
+      setMsg(`Mubarak! Aapne ₹${clickedCard.value} jeete! 💸`);
     }
   };
 
@@ -47,7 +59,8 @@ const App: React.FC = () => {
           <Card 
             key={card.id} 
             data={card} 
-            onFlip={handleCardClick} 
+            flipped={card.flipped}
+            onFlip={() => handleCardClick(card.id)} 
           />
         ))}
       </div>

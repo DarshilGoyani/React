@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Define Props Interface
 interface CardProps {
@@ -7,21 +7,13 @@ interface CardProps {
     value: number;
     icon: string;
   };
-  onFlip: (type: 'gold' | 'monster', value: number) => void;
+  flipped: boolean;
+  onFlip: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ data, onFlip }) => {
-  const [flipped, setFlipped] = useState<boolean>(false);
-
-  const handleClick = (): void => {
-    if (!flipped) {
-      setFlipped(true);
-      onFlip(data.type, data.value);
-    }
-  };
-
+const Card: React.FC<CardProps> = ({ data, flipped, onFlip }) => {
   return (
-    <div className={`card ${flipped ? 'flipped' : ''}`} onClick={handleClick}>
+    <div className={`card ${flipped ? 'flipped' : ''}`} onClick={onFlip}>
       <div className="card-inner">
         {/* Front Side */}
         <div className="card-front">
