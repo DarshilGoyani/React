@@ -1,0 +1,140 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "p_name": "paneer",
+      "p_price": 300,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://cdn.pixabay.com/photo/2017/01/26/02/06/cheese-2007847_640.jpg",
+      "p_stock": 20,
+      "p_description": "paneer is a fresh cheese"
+    },
+    {
+      "id": "2",
+      "p_name": "milk",
+      "p_price": 60,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://cdn.pixabay.com/photo/2016/12/06/18/27/milk-1887234_640.jpg",
+      "p_stock": 50,
+      "p_description": "fresh cow milk"
+    },
+    {
+      "id": "3",
+      "p_name": "bread",
+      "p_price": 40,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-buns-1238246_640.jpg",
+      "p_stock": 35,
+      "p_description": "soft white bread loaf"
+    },
+    {
+      "id": "4",
+      "p_name": "eggs",
+      "p_price": 90,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://cdn.pixabay.com/photo/2016/07/22/09/59/eggs-1536990_640.jpg",
+      "p_stock": 100,
+      "p_description": "farm fresh eggs"
+    },
+    {
+      "id": "5",
+      "p_name": "rice",
+      "p_price": 120,
+      "p_category": "Staples",
+      "p_image": "https://cdn.pixabay.com/photo/2017/06/02/18/24/rice-2367029_640.jpg",
+      "p_stock": 80,
+      "p_description": "premium quality basmati rice"
+    },
+    {
+      "id": "6",
+      "p_name": "wheat flour",
+      "p_price": 55,
+      "p_category": "Staples",
+      "p_image": "https://cdn.pixabay.com/photo/2017/01/20/15/06/flour-1995060_640.jpg",
+      "p_stock": 60,
+      "p_description": "finely ground wheat flour"
+    },
+    {
+      "id": "7",
+      "p_name": "sugar",
+      "p_price": 45,
+      "p_category": "Staples",
+      "p_image": "https://cdn.pixabay.com/photo/2017/05/07/08/56/sugar-2294206_640.jpg",
+      "p_stock": 70,
+      "p_description": "refined white sugar"
+    },
+    {
+      "id": "8",
+      "p_name": "salt",
+      "p_price": 20,
+      "p_category": "Staples",
+      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/salt-1238245_640.jpg",
+      "p_stock": 100,
+      "p_description": "iodized table salt"
+    },
+    {
+      "id": "9",
+      "p_name": "tomato",
+      "p_price": 30,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/tomatoes-1238244_640.jpg",
+      "p_stock": 90,
+      "p_description": "fresh red tomatoes"
+    },
+    {
+      "id": "10",
+      "p_name": "potato",
+      "p_price": 25,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/potatoes-1238243_640.jpg",
+      "p_stock": 120,
+      "p_description": "organic potatoes"
+    },
+    {
+      "id": "11",
+      "p_name": "onion",
+      "p_price": 35,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/onions-1238242_640.jpg",
+      "p_stock": 110,
+      "p_description": "fresh onions"
+    },
+    {
+      "id": "12",
+      "p_name": "apple",
+      "p_price": 150,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://cdn.pixabay.com/photo/2016/02/23/17/42/apple-1218166_640.jpg",
+      "p_stock": 75,
+      "p_description": "fresh red apples"
+    },
+    {
+      "id": "13",
+      "p_name": "banana",
+      "p_price": 50,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://cdn.pixabay.com/photo/2018/08/30/19/52/banana-3645415_640.jpg",
+      "p_stock": 95,
+      "p_description": "ripe bananas"
+    },
+    {
+      "id": "14",
+      "p_name": "cooking oil",
+      "p_price": 180,
+      "p_category": "Staples",
+      "p_image": "https://cdn.pixabay.com/photo/2017/01/20/15/06/oil-1995061_640.jpg",
+      "p_stock": 65,
+      "p_description": "refined cooking oil"
+    },
+    {
+      "id": "15",
+      "p_name": "butter",
+      "p_price": 250,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://cdn.pixabay.com/photo/2014/10/23/18/05/butter-500973_640.jpg",
+      "p_stock": 40,
+      "p_description": "creamery butter"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

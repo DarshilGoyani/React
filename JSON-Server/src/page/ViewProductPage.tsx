@@ -1,58 +1,178 @@
-import { Edit3, Trash2, IndianRupee } from "lucide-react";
+import { useEffect, useState } from "react";
+import type { productFetchType } from "../utils/global";
+import { deleteProduct, fetchAllProducts } from "../services/ProductService";
+import { useNavigate } from "react-router";
 
-const SAMPLE_PRODUCTS = [
-  { id: 1, name: "Amul Taaza Milk", price: 27, weight: "500 ml", img: "https://cdn.pixabay.com/photo/2017/07/05/15/41/milk-2474993_1280.jpg" },
-  { id: 2, name: "Fresh Bananas", price: 40, weight: "1 kg", img: "https://cdn.pixabay.com/photo/2017/10/09/19/29/eat-2834549_1280.jpg" },
-];
+export default function ViewProductPage() {
+    const [allProducts, setAllProduct] = useState<productFetchType[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [itemPerPage, setItemPerPage] = useState(10);
 
-export default function ViewProducts() {
-  return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl font-black text-gray-900">All Products</h2>
-        <span className="bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-sm font-bold">
-          {SAMPLE_PRODUCTS.length} Items
-        </span>
-      </div>
+    const navigate = useNavigate();
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {SAMPLE_PRODUCTS.map((product) => (
-          <div key={product.id} className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all group">
-            {/* Image Container */}
-            <div className="h-40 bg-gray-50 rounded-xl mb-3 overflow-hidden relative">
-              <img 
-                src={product.img} 
-                alt={product.name} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button className="p-2 bg-white rounded-full shadow-md text-blue-600 hover:bg-blue-50">
-                  <Edit3 size={16} />
-                </button>
-                <button className="p-2 bg-white rounded-full shadow-md text-red-600 hover:bg-red-50">
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            </div>
+    const totalItems = allProducts.length; 
+    const totalPages = Math.ceil(totalItems / itemPerPage); 
 
-            {/* Info */}
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{product.weight}</span>
-              <h3 className="font-bold text-gray-800 text-sm leading-tight h-10 line-clamp-2">{product.name}</h3>
-              
-              <div className="flex items-center justify-between pt-2">
-                <div className="flex items-center font-black text-sm text-gray-900">
-                  <IndianRupee size={12} />
-                  {product.price}
+    const startIndex = (currentPage - 1) * itemPerPage;
+    const endIndex = startIndex + itemPerPage;
+
+    const currentProducts = allProducts.slice(startIndex, endIndex);
+
+    useEffect(() => {
+        getAllProducts();
+    }, []);
+
+    const getAllProducts = async () => {
+        try {
+            const allProductData = await fetchAllProducts();
+            console.log("View Page Data:", allProductData);
+            if (Array.isArray(allProductData)) {
+                setAllProduct(allProductData);
+            }
+        } catch (error) {
+            console.error("Error fetching inventory:", error);
+        }
+    };
+
+    return (
+        <div className="container mx-auto py-8">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                <div>
+                    <h1 className="text-3xl font-extrabold text-slate-900">Product Inventory</h1>
+                    <p className="text-slate-500 text-sm">Manage your catalog and stock levels</p>
                 </div>
-                <button className="text-[#0c831f] border border-[#0c831f] px-4 py-1 rounded-lg text-xs font-black hover:bg-[#0c831f] hover:text-white transition-colors uppercase">
-                  Edit
-                </button>
-              </div>
+                <div className="bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">
+                    <span className="text-slate-500 text-sm">Total Products: </span>
+                    <span className="font-bold text-indigo-600">{allProducts.length}</span>
+                </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+
+            <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                        <thead>
+                            <tr className="bg-slate-50 border-b border-slate-200">
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">No.</th>
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Product</th>
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Category</th>
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Price</th>
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Stock</th>
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Description</th>
+                                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                            {currentProducts.length > 0 ? (
+                                currentProducts.map((product, index) => (
+                                    <tr key={product.id || index} className="hover:bg-slate-50/80 transition-colors group">
+                                        <td className="px-6 py-4 text-sm font-medium text-slate-400">
+                                            {startIndex + index + 1}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-4">
+                                                <img
+                                                    src={product.p_image}
+                                                    alt={product.p_name}
+                                                    className="w-12 h-12 rounded-lg object-cover bg-slate-100 border border-slate-200"
+                                                />
+                                                <span className="font-semibold text-slate-800">{product.p_name}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
+                                                {product.p_category}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-bold text-slate-700">
+                                            ₹{Number(product.p_price).toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className={`text-sm font-medium ${product.p_stock < 10 ? 'text-red-500' : 'text-slate-600'}`}>
+                                                {product.p_stock} units
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <p className="text-sm text-slate-500 max-w-[200px] truncate" title={product.p_description}>
+                                                {product.p_description}
+                                            </p>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex justify-center items-center gap-2">
+                                                <button onClick={() => navigate(`/edit-product/${product.id}`)} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all" title="Edit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-5M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z" />
+                                                    </svg>
+                                                </button>
+                                                <button onClick={async () => {
+                                                    if (confirm("Are you sure you want to delete this product?")) {
+                                                        const status = await deleteProduct(product.id);
+                                                        if (status) getAllProducts();
+                                                    }
+                                                }} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all" title="Delete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={7} className="px-6 py-12 text-center text-slate-400 italic">
+                                        No products found in the inventory.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div className="flex items-center gap-2">
+                    <button 
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+                        className={`px-4 py-2 border rounded-lg transition-colors ${currentPage === 1 ? 'bg-slate-50 text-slate-300 border-slate-200' : 'hover:bg-slate-50 text-slate-600 border-slate-300'}`}
+                    >
+                        {"<"}
+                    </button>
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button 
+                            key={index}
+                            onClick={() => setCurrentPage(index + 1)} 
+                            className={`px-4 py-2 border rounded-lg transition-all ${(currentPage === index + 1) ? 'bg-indigo-600 text-white border-indigo-600 shadow-md' : 'hover:bg-slate-50 text-slate-600 border-slate-300'}`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    <button 
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} 
+                        className={`px-4 py-2 border rounded-lg transition-colors ${currentPage === totalPages ? 'bg-slate-50 text-slate-300 border-slate-200' : 'hover:bg-slate-50 text-slate-600 border-slate-300'}`}
+                    >
+                        {">"}
+                    </button>
+                </div>
+
+                <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">
+                    <span className="text-sm text-slate-500 font-medium">Items per page:</span>
+                    <select 
+                        className="bg-transparent text-sm font-bold text-slate-700 focus:outline-none cursor-pointer"
+                        value={itemPerPage}
+                        onChange={(event) => {
+                            setItemPerPage(Number(event.target.value));
+                            setCurrentPage(1);
+                        }}  
+                    >
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={50}>50</option>
+                        <option value={100}>100</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    );
 }

@@ -1,71 +1,140 @@
-import { ShoppingBag } from "lucide-react";
-
-// Robust links from a different provider (Pexels/via.placeholder)
-const CATEGORIES = [
-  { 
-    id: 1, 
-    name: "Dairy, Bread & Eggs", 
-    img: "https://cdn.pixabay.com/photo/2017/07/05/15/41/milk-2474993_1280.jpg" 
-  },
-  { 
-    id: 2, 
-    name: "Fruits & Vegetables", 
-    img: "https://cdn.pixabay.com/photo/2017/10/09/19/29/eat-2834549_1280.jpg" 
-  },
-  { 
-    id: 3, 
-    name: "Cold Drinks & Juices", 
-    img: "https://cdn.pixabay.com/photo/2018/02/25/07/15/food-3179853_1280.jpg" 
-  },
-  { 
-    id: 4, 
-    name: "Snacks & Munchies", 
-    img: "https://cdn.pixabay.com/photo/2016/09/01/19/23/chips-1637305_1280.jpg" 
-  },
-];
+import { useEffect, useState } from "react";
+import { fetchAllProducts } from "../services/ProductService";
+import type { productFetchType } from "../utils/global";
+import { Link } from "react-router-dom"; // changed to react-router-dom
 
 export default function HomePage() {
-  return (
-    <div className="p-6">
-      {/* Banner Section */}
-      <div className="w-full h-[300px] bg-[#F7EFCF] rounded-3xl mb-10 overflow-hidden flex items-center justify-between px-12 border border-yellow-100">
-        <div>
-          <h2 className="text-4xl font-black mb-4">Superfast Delivery <br /> in <span className="text-green-700">10 Minutes</span></h2>
-          <button className="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-all">Shop Now</button>
-        </div>
-        <img 
-          src="https://cdn.pixabay.com/photo/2016/04/12/21/13/shoppings-1325413_1280.jpg" 
-          alt="Grocery Delivery"
-          className="h-64 w-64 object-cover rounded-2xl shadow-2xl rotate-3"
-          onError={(e) => {
-             console.error("Banner Image Load Failed");
-             (e.target as HTMLImageElement).src = 'https://via.placeholder.com/500x300?text=Blinkit+Banner';
-          }}
-        />
-      </div>
 
-      {/* Categories Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {CATEGORIES.map((cat) => (
-          <div key={cat.id} className="group cursor-pointer">
-            <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm group-hover:shadow-md transition-all">
-              <div className="h-40 overflow-hidden rounded-xl mb-4 bg-gray-100">
-                <img 
-                  src={cat.img} 
-                  alt={cat.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onLoad={() => console.log(`${cat.name} loaded`)}
-                  onError={(e) => {
-                    console.error(`${cat.name} failed to load`);
-                    (e.target as HTMLImageElement).src = `https://via.placeholder.com/300?text=${cat.name}`;
-                  }}
-                />
-              </div>
-              <h3 className="font-bold text-center group-hover:text-green-600 transition-colors">{cat.name}</h3>
+    const [allProducts, setAllProducts] = useState<productFetchType[]>([]);
+    const [allCategories, setAllCategories] = useState<string[]>([]);
+    const [filterCategory, setFilterCategory] = useState<string>("All");
+
+    useEffect(() => {
+        getAllProductData();
+    }, []);
+
+    useEffect(() => {
+
+        let allCategory: any = new Set(allProducts.map((product) => product.p_category));
+
+        allCategory = Array.from(allCategory);
+
+        console.log("All Category : ", allCategory);// []
+
+        setAllCategories(["All", ...allCategory]);
+
+    }, [allProducts]);
+
+
+
+    const getAllProductData = async () => {
+        try {
+            const allProductData = await fetchAllProducts();
+            console.log("Fetched Products:", allProductData);
+            if (Array.isArray(allProductData)) {
+                setAllProducts(allProductData);
+            } else {
+                console.error("Data is not an array:", allProductData);
+            }
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
+
+    const filterProducts = (filterCategory === "All")
+        ? allProducts
+        : allProducts.filter((product) => product.p_category === filterCategory);
+
+
+
+    return (
+        <div className="bg-gray-50 min-h-screen pb-12">
+            {/* Hero Section */}
+            <div className="bg-white border-b border-gray-200 mb-10">
+                <div className="max-w-7xl mx-auto py-12 px-4 text-center">
+                    <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+                        Featured <span className="text-indigo-600">Products  </span>
+                    </h1>
+                    <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                        Explore our latest collection of high-quality items curated just for you.
+                    </p>
+                </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+
+            <div>
+                {allCategories.map((category, index) => {
+                    return (
+                        <button key={index} onClick={() => setFilterCategory(category)} className={`${(filterCategory === category) ? "bg-black hover:bg-gray-700" : "bg-indigo-600 hover:bg-indigo-700"} m-4 text-white p-2.5 rounded-xl shadow-md shadow-indigo-100 transition-all active:scale-90`}>
+                            {category}
+                        </button>)
+                })}
+            </div>
+
+            {/* Product Grid */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {filterProducts.map((product, index) => (
+                        <Link key={product.id || index} to={`product-detail/${product.id}`}>
+                            <div
+
+                                className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+                            >
+                                {/* Image Container */}
+                                <div className="relative aspect-square overflow-hidden bg-gray-100">
+                                    <img
+                                        src={product.p_image}
+                                        alt={product.p_name}
+                                        className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute top-3 left-3">
+                                        <span className="bg-white/90 backdrop-blur-sm text-indigo-600 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md shadow-sm border border-gray-100">
+                                            {product.p_category}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Product Info */}
+                                <div className="p-5 flex flex-col flex-grow">
+                                    <div className="mb-2">
+                                        <h2 className="text-lg font-bold text-gray-800 line-clamp-1 group-hover:text-indigo-600 transition-colors">
+                                            {product.p_name}
+                                        </h2>
+                                    </div>
+
+                                    <p className="text-gray-500 text-sm line-clamp-2 mb-4 flex-grow">
+                                        {product.p_description}
+                                    </p>
+
+                                    <div className="flex items-center justify-between mt-auto">
+                                        <div className="flex flex-col">
+                                            <span className="text-xs text-gray-400 uppercase font-semibold">Price</span>
+                                            <span className="text-xl font-black text-gray-900">₹{Number(product.p_price).toLocaleString()}</span>
+                                        </div>
+
+                                        <button className="bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 rounded-xl shadow-md shadow-indigo-100 transition-all active:scale-90">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Empty State */}
+                {filterProducts.length === 0 && (
+                    <div className="text-center py-20">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 text-gray-400 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                        </div>
+                        <p className="text-gray-500 font-medium">No products available at the moment.</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }
