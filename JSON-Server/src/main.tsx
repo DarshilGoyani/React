@@ -5,6 +5,10 @@ import { router } from './router/routes'
 
 
 
+import { CartProvider } from './utils/CartContext'
+
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}/>
+  <CartProvider>
+    <RouterProvider router={router}/>
+  </CartProvider>
 )

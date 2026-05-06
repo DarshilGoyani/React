@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { fetchAllProducts } from "../services/ProductService";
 import type { productFetchType } from "../utils/global";
 import { Link } from "react-router-dom"; // changed to react-router-dom
+import { useCart } from "../utils/CartContext";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
 
+    const { addToCart } = useCart();
     const [allProducts, setAllProducts] = useState<productFetchType[]>([]);
     const [allCategories, setAllCategories] = useState<string[]>([]);
     const [filterCategory, setFilterCategory] = useState<string>("All");
@@ -111,7 +114,14 @@ export default function HomePage() {
                                             <span className="text-xl font-black text-gray-900">₹{Number(product.p_price).toLocaleString()}</span>
                                         </div>
 
-                                        <button className="bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 rounded-xl shadow-md shadow-indigo-100 transition-all active:scale-90">
+                                        <button 
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                addToCart(product);
+                                                toast.success(`${product.p_name} added to cart!`);
+                                            }}
+                                            className="bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 rounded-xl shadow-md shadow-indigo-100 transition-all active:scale-90"
+                                        >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                             </svg>

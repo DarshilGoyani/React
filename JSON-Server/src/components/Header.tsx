@@ -1,7 +1,10 @@
-import { LayoutGrid, MapPin, PlusCircle, Search } from 'lucide-react'
+import { LayoutGrid, MapPin, PlusCircle, Search, ShoppingCart } from 'lucide-react'
 import { NavLink } from 'react-router'
+import { useCart } from '../utils/CartContext'
 
 export default function Header() {
+  const { cartCount, cartTotal } = useCart();
+
   return <>
     {/* GLOBAL TOP BAR */}
       <header className="sticky top-0 z-[100] bg-white shadow-sm border-b border-gray-100">
@@ -51,6 +54,29 @@ export default function Header() {
             >
               <LayoutGrid size={18} />
               <span>View Products</span>
+            </NavLink>
+
+            {/* Cart Button */}
+            <NavLink 
+              to="/cart"
+              className={({isActive}) => `${isActive? "bg-indigo-700": "bg-indigo-600"} text-white px-5 py-2.5 rounded-lg flex items-center gap-3 hover:bg-indigo-700 transition-all font-bold shadow-md relative group`}
+            >
+              <div className="relative">
+                <ShoppingCart size={20} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black h-5 w-5 flex items-center justify-center rounded-full border-2 border-indigo-600 group-hover:border-indigo-700">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-col items-start leading-none">
+                <span className="text-[10px] opacity-80 uppercase tracking-tighter">My Cart</span>
+                {cartCount > 0 ? (
+                  <span className="text-sm">₹{cartTotal.toLocaleString()}</span>
+                ) : (
+                  <span className="text-sm">Empty</span>
+                )}
+              </div>
             </NavLink>
           </div>
         </div>

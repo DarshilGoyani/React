@@ -5,7 +5,7 @@
       "p_name": "paneer",
       "p_price": 300,
       "p_category": "Dairy, Bread & Eggs",
-      "p_image": "https://cdn.pixabay.com/photo/2017/01/26/02/06/cheese-2007847_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d",
       "p_stock": 20,
       "p_description": "paneer is a fresh cheese"
     },
@@ -14,7 +14,7 @@
       "p_name": "milk",
       "p_price": 60,
       "p_category": "Dairy, Bread & Eggs",
-      "p_image": "https://cdn.pixabay.com/photo/2016/12/06/18/27/milk-1887234_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1563636619-e9143da7973b",
       "p_stock": 50,
       "p_description": "fresh cow milk"
     },
@@ -23,7 +23,7 @@
       "p_name": "bread",
       "p_price": 40,
       "p_category": "Dairy, Bread & Eggs",
-      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-buns-1238246_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec",
       "p_stock": 35,
       "p_description": "soft white bread loaf"
     },
@@ -32,7 +32,7 @@
       "p_name": "eggs",
       "p_price": 90,
       "p_category": "Dairy, Bread & Eggs",
-      "p_image": "https://cdn.pixabay.com/photo/2016/07/22/09/59/eggs-1536990_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1639194335563-d56b83f0060c?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "p_stock": 100,
       "p_description": "farm fresh eggs"
     },
@@ -41,7 +41,7 @@
       "p_name": "rice",
       "p_price": 120,
       "p_category": "Staples",
-      "p_image": "https://cdn.pixabay.com/photo/2017/06/02/18/24/rice-2367029_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1586201375761-83865001e31c",
       "p_stock": 80,
       "p_description": "premium quality basmati rice"
     },
@@ -50,7 +50,7 @@
       "p_name": "wheat flour",
       "p_price": 55,
       "p_category": "Staples",
-      "p_image": "https://cdn.pixabay.com/photo/2017/01/20/15/06/flour-1995060_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec",
       "p_stock": 60,
       "p_description": "finely ground wheat flour"
     },
@@ -59,7 +59,7 @@
       "p_name": "sugar",
       "p_price": 45,
       "p_category": "Staples",
-      "p_image": "https://cdn.pixabay.com/photo/2017/05/07/08/56/sugar-2294206_640.jpg",
+      "p_image": "https://plus.unsplash.com/premium_photo-1726072362679-2b2023862024?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "p_stock": 70,
       "p_description": "refined white sugar"
     },
@@ -68,7 +68,7 @@
       "p_name": "salt",
       "p_price": 20,
       "p_category": "Staples",
-      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/salt-1238245_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1580910051074-3eb694886505",
       "p_stock": 100,
       "p_description": "iodized table salt"
     },
@@ -77,7 +77,7 @@
       "p_name": "tomato",
       "p_price": 30,
       "p_category": "Fruits & Vegetables",
-      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/tomatoes-1238244_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce",
       "p_stock": 90,
       "p_description": "fresh red tomatoes"
     },
@@ -86,7 +86,7 @@
       "p_name": "potato",
       "p_price": 25,
       "p_category": "Fruits & Vegetables",
-      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/potatoes-1238243_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "p_stock": 120,
       "p_description": "organic potatoes"
     },
@@ -95,7 +95,7 @@
       "p_name": "onion",
       "p_price": 35,
       "p_category": "Fruits & Vegetables",
-      "p_image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/onions-1238242_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1587049352851-8d4e89133924",
       "p_stock": 110,
       "p_description": "fresh onions"
     },
@@ -104,7 +104,7 @@
       "p_name": "apple",
       "p_price": 150,
       "p_category": "Fruits & Vegetables",
-      "p_image": "https://cdn.pixabay.com/photo/2016/02/23/17/42/apple-1218166_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
       "p_stock": 75,
       "p_description": "fresh red apples"
     },
@@ -113,7 +113,7 @@
       "p_name": "banana",
       "p_price": 50,
       "p_category": "Fruits & Vegetables",
-      "p_image": "https://cdn.pixabay.com/photo/2018/08/30/19/52/banana-3645415_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "p_stock": 95,
       "p_description": "ripe bananas"
     },
@@ -122,7 +122,7 @@
       "p_name": "cooking oil",
       "p_price": 180,
       "p_category": "Staples",
-      "p_image": "https://cdn.pixabay.com/photo/2017/01/20/15/06/oil-1995061_640.jpg",
+      "p_image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d",
       "p_stock": 65,
       "p_description": "refined cooking oil"
     },
@@ -131,10 +131,279 @@
       "p_name": "butter",
       "p_price": 250,
       "p_category": "Dairy, Bread & Eggs",
-      "p_image": "https://cdn.pixabay.com/photo/2014/10/23/18/05/butter-500973_640.jpg",
+      "p_image": "https://plus.unsplash.com/premium_photo-1699651798312-dd6d2734b4fb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "p_stock": 40,
       "p_description": "creamery butter"
+    },
+    {
+      "id": "16",
+      "p_name": "cheese",
+      "p_price": 220,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://images.unsplash.com/photo-1683314573422-649a3c6ad784?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 30,
+      "p_description": "processed cheese slices"
+    },
+    {
+      "id": "17",
+      "p_name": "curd",
+      "p_price": 80,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://images.unsplash.com/photo-1633383718081-22ac93e3db65?q=80&w=1058&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 45,
+      "p_description": "fresh homemade curd"
+    },
+    {
+      "id": "18",
+      "p_name": "buttermilk",
+      "p_price": 30,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://plus.unsplash.com/premium_photo-1694481100261-ab16523c4093?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 60,
+      "p_description": "refreshing buttermilk"
+    },
+    {
+      "id": "19",
+      "p_name": "brown bread",
+      "p_price": 50,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://images.unsplash.com/photo-1615329399228-5d5d98a40e35?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 25,
+      "p_description": "healthy brown bread"
+    },
+    {
+      "id": "20",
+      "p_name": "oats",
+      "p_price": 140,
+      "p_category": "Staples",
+      "p_image": "https://plus.unsplash.com/premium_photo-1671130295244-b058fc8d86fe?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 70,
+      "p_description": "high fiber oats"
+    },
+    {
+      "id": "21",
+      "p_name": "maida",
+      "p_price": 60,
+      "p_category": "Staples",
+      "p_image": "https://imgs.search.brave.com/T7_zC_Hc-fU8E2gZd9JzEU3chhsgBpdsH1l9G-s2Rzw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly81Lmlt/aW1nLmNvbS9kYXRh/NS9TRUxMRVIvRGVm/YXVsdC8yMDIyLzEw/L0NIL1JML0tHLzQ4/MDIzNTQzLzItMjUw/eDI1MC5qcGc",
+      "p_stock": 55,
+      "p_description": "refined wheat flour"
+    },
+    {
+      "id": "22",
+      "p_name": "corn flour",
+      "p_price": 75,
+      "p_category": "Staples",
+      "p_image": "https://plus.unsplash.com/premium_photo-1671377660174-e43996bfdf03?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 40,
+      "p_description": "fine corn flour"
+    },
+    {
+      "id": "23",
+      "p_name": "honey",
+      "p_price": 200,
+      "p_category": "Staples",
+      "p_image": "https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 35,
+      "p_description": "natural honey"
+    },
+    {
+      "id": "24",
+      "p_name": "tea",
+      "p_price": 180,
+      "p_category": "Staples",
+      "p_image": "https://plus.unsplash.com/premium_photo-1674406481284-43eba097a291?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 80,
+      "p_description": "premium tea leaves"
+    },
+    {
+      "id": "25",
+      "p_name": "coffee",
+      "p_price": 250,
+      "p_category": "Staples",
+      "p_image": "https://plus.unsplash.com/premium_photo-1675435644687-562e8042b9db?q=80&w=749&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 65,
+      "p_description": "instant coffee powder"
+    },
+    {
+      "id": "26",
+      "p_name": "carrot",
+      "p_price": 40,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 90,
+      "p_description": "fresh carrots"
+    },
+    {
+      "id": "27",
+      "p_name": "cabbage",
+      "p_price": 35,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?q=80&w=685&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 60,
+      "p_description": "green cabbage"
+    },
+    {
+      "id": "28",
+      "p_name": "cauliflower",
+      "p_price": 45,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1566842600175-97dca489844f?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 50,
+      "p_description": "fresh cauliflower"
+    },
+    {
+      "id": "29",
+      "p_name": "spinach",
+      "p_price": 25,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 70,
+      "p_description": "green spinach leaves"
+    },
+    {
+      "id": "30",
+      "p_name": "mango",
+      "p_price": 120,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1732472581875-89ff83f18439?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 85,
+      "p_description": "sweet mangoes"
+    },
+    {
+      "id": "31",
+      "p_name": "orange",
+      "p_price": 90,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1592187270271-9a4b84faa228?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 75,
+      "p_description": "juicy oranges"
+    },
+    {
+      "id": "32",
+      "p_name": "grapes",
+      "p_price": 110,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://plus.unsplash.com/premium_photo-1724250449759-f9bbb5fd4f63?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 60,
+      "p_description": "fresh grapes"
+    },
+    {
+      "id": "33",
+      "p_name": "watermelon",
+      "p_price": 70,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://plus.unsplash.com/premium_photo-1724256227267-cfe917bc1d9b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 50,
+      "p_description": "cool watermelon"
+    },
+    {
+      "id": "34",
+      "p_name": "pineapple",
+      "p_price": 95,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1589820296156-2454bb8a6ad1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 45,
+      "p_description": "tropical pineapple"
+    },
+    {
+      "id": "35",
+      "p_name": "peas",
+      "p_price": 60,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://plus.unsplash.com/premium_photo-1663844169236-ff32474d1dc8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 70,
+      "p_description": "green peas"
+    },
+    {
+      "id": "36",
+      "p_name": "chili",
+      "p_price": 30,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://plus.unsplash.com/premium_photo-1675864033264-cb9db758422d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 90,
+      "p_description": "spicy green chilies"
+    },
+    {
+      "id": "37",
+      "p_name": "ginger",
+      "p_price": 80,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://images.unsplash.com/photo-1630623093145-f606591c2546?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 50,
+      "p_description": "fresh ginger root"
+    },
+    {
+      "id": "38",
+      "p_name": "garlic",
+      "p_price": 100,
+      "p_category": "Fruits & Vegetables",
+      "p_image": "https://plus.unsplash.com/premium_photo-1675731118551-79b3da05a5d4?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 60,
+      "p_description": "organic garlic"
+    },
+    {
+      "id": "39",
+      "p_name": "ketchup",
+      "p_price": 120,
+      "p_category": "Staples",
+      "p_image": "https://images.unsplash.com/photo-1624462048568-72794ee6d6f8?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 40,
+      "p_description": "tomato ketchup"
+    },
+    {
+      "id": "40",
+      "p_name": "noodles",
+      "p_price": 50,
+      "p_category": "Staples",
+      "p_image": "https://plus.unsplash.com/premium_photo-1694670234085-4f38b261ce5b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 80,
+      "p_description": "instant noodles"
+    },
+    {
+      "id": "41",
+      "p_name": "biscuits",
+      "p_price": 30,
+      "p_category": "Staples",
+      "p_image": "https://plus.unsplash.com/premium_photo-1667621221004-e344ae82ad7e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 100,
+      "p_description": "crispy biscuits"
+    },
+    {
+      "id": "42",
+      "p_name": "chips",
+      "p_price": 20,
+      "p_category": "Staples",
+      "p_image": "https://images.unsplash.com/photo-1613919113640-25732ec5e61f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 120,
+      "p_description": "potato chips"
+    },
+    {
+      "id": "43",
+      "p_name": "chocolate",
+      "p_price": 150,
+      "p_category": "Staples",
+      "p_image": "https://images.unsplash.com/photo-1610450949065-1f2841536c88?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 90,
+      "p_description": "milk chocolate"
+    },
+    {
+      "id": "44",
+      "p_name": "ice cream",
+      "p_price": 200,
+      "p_category": "Dairy, Bread & Eggs",
+      "p_image": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 50,
+      "p_description": "vanilla ice cream"
+    },
+    {
+      "id": "45",
+      "p_name": "juice",
+      "p_price": 80,
+      "p_category": "Staples",
+      "p_image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "p_stock": 70,
+      "p_description": "mixed fruit juice"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
