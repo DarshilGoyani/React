@@ -2,146 +2,140 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Flame, Target, Zap } from 'lucide-react';
+import { ShieldAlert, BarChart3, Binary, Layers } from 'lucide-react';
 
-// Values data with Lucide icons
 const valuesData = [
     {
-        icon: <Flame className="w-8 h-8 text-emerald-400" />,
-        title: "Bold work wins",
-        description: "We challenge conventions, push creative boundaries, and build solutions that stand out—because safe ideas don't spark real growth."
+        icon: <ShieldAlert className="w-5 h-5 text-emerald-400" />,
+        title: "Clean, Defensible Architecture",
+        description: "We bypass quick hacks to ensure long-term viability, writing highly predictable, componentized, and completely tested infrastructure."
     },
     {
-        icon: <Target className="w-8 h-8 text-emerald-400" />,
-        title: "Performance over promises",
-        description: "We don't rely on buzzwords or empty claims—every strategy is tracked, measured, and optimized for results you can actually see."
+        icon: <BarChart3 className="w-5 h-5 text-emerald-400" />,
+        title: "Measurable System Output",
+        description: "Performance isn't an assumption. Every system is deeply integrated with monitoring tools tracking precise transaction times and metrics."
     },
     {
-        icon: <Zap className="w-8 h-8 text-emerald-400" />,
-        title: "Think smart, act fast",
-        description: "In a fast-moving digital world, we combine agile execution with intelligent planning to stay ahead of trends and ahead of competitors."
+        icon: <Binary className="w-5 h-5 text-emerald-400" />,
+        title: "Agile System Iteration",
+        description: "Adapting quickly to shifts in technology requires clean abstraction layers. We assemble modular platforms configured for immediate change."
     }
 ];
 
-// Framer Motion Variants
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        transition: { staggerChildren: 0.2 }
+        transition: { staggerChildren: 0.1 }
     }
 };
 
 const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
 export default function About() {
     return (
-        <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-emerald-500/30 font-sans">
+        <main className="min-h-screen bg-[#050505] text-[#ededed] font-sans selection:bg-emerald-500/30 overflow-x-hidden">
             
-            {/* 1. ABOUT BENTO BOX SECTION */}
-            <section className="py-24 px-6 flex justify-center items-center overflow-hidden">
+            {/* BENTO BOX SECTION */}
+            <section className="py-28 px-6 max-w-7xl mx-auto w-full">
                 <motion.div 
                     initial="hidden"
                     animate="visible"
                     variants={containerVariants}
-                    className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6"
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-6"
                 >
-                    {/* LEFT CARD */}
+                    {/* LEFT CELL (Profile/Vision) */}
                     <motion.div 
                         variants={itemVariants}
-                        className="lg:col-span-5 bg-gradient-to-br from-emerald-900/20 to-[#121212] border border-emerald-500/20 rounded-[2rem] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group"
+                        className="lg:col-span-5 bg-[#0d0d0d] border border-white/[0.05] rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group"
                     >
-                        {/* Subtle Glow Effect */}
-                        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.1),transparent_60%)]" />
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/[0.02] blur-[80px] pointer-events-none" />
                         
-                        <div className="relative z-10">
-                            <h2 className="text-2xl md:text-3xl leading-snug font-medium mb-10 text-gray-200">
-                                <span className="text-emerald-400 font-semibold">Darshil Goyani</span> represents a collective of strategists, developers, and creatives who care deeply about scalable outcomes.
+                        <div className="mb-8">
+                            <div className="flex items-center gap-2 mb-4">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">The Operator</span>
+                            </div>
+                            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white leading-snug">
+                                Darshil Goyani runs a micro-collective engineered to deploy highly resilient technical structures.
                             </h2>
                         </div>
 
-                        <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative z-10">
+                        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.05] relative shadow-inner">
                             <img
                                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop"
-                                alt="Coding Workspace"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out grayscale hover:grayscale-0"
+                                alt="Engineering Infrastructure Ecosystem"
+                                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 filter grayscale brightness-75 contrast-125"
                             />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                         </div>
                     </motion.div>
 
-                    {/* RIGHT CARD */}
+                    {/* RIGHT CELL (Stats & Statement) */}
                     <motion.div 
                         variants={itemVariants}
-                        className="lg:col-span-7 bg-[#121212] border border-white/5 rounded-[2rem] p-8 md:p-12 flex flex-col justify-between"
+                        className="lg:col-span-7 bg-[#0d0d0d] border border-white/[0.05] rounded-3xl p-8 md:p-10 flex flex-col justify-between"
                     >
                         <div>
                             <div className="flex items-center gap-3 mb-6">
-                                <span className="w-8 h-[1px] bg-emerald-500/50"></span>
-                                <span className="text-emerald-400 text-xs font-semibold tracking-widest uppercase">About</span>
+                                <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Track Record</span>
+                                <div className="h-[1px] flex-1 bg-white/[0.05]" />
                             </div>
-                            <h3 className="text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.2] font-medium tracking-tight text-gray-100">
-                                Over the years, we've helped tech innovators and bold businesses break through the noise with high-end, performant architectures.
+                            <h3 className="text-2xl md:text-4xl font-light tracking-tight text-gray-300 leading-relaxed">
+                                Over the years, we have scaled digital ecosystems for global clients, mitigating load failures, modernizing brittle frameworks, and translating raw code arrays into absolute runtime assets.
                             </h3>
                         </div>
                         
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16 pt-10 border-t border-white/5">
-                            <div className="flex flex-col">
-                                <h4 className="text-4xl md:text-5xl font-bold tracking-tighter text-white">99%</h4>
-                                <p className="text-gray-400 text-sm font-medium mt-2">Client Satisfaction</p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/[0.04]">
+                            <div>
+                                <h4 className="text-4xl font-extrabold tracking-tight text-white font-mono">99.9%</h4>
+                                <p className="text-gray-400 text-xs font-medium mt-1">Uptime Maintained</p>
                             </div>
-                            <div className="flex flex-col">
-                                <h4 className="text-4xl md:text-5xl font-bold tracking-tighter text-white">12M+</h4>
-                                <p className="text-gray-400 text-sm font-medium mt-2">Requests Handled</p>
+                            <div>
+                                <h4 className="text-4xl font-extrabold tracking-tight text-white font-mono">12M+</h4>
+                                <p className="text-gray-400 text-xs font-medium mt-1">API Node Requests</p>
                             </div>
-                            <div className="flex flex-col">
-                                <h4 className="text-4xl md:text-5xl font-bold tracking-tighter text-white">180+</h4>
-                                <p className="text-gray-400 text-sm font-medium mt-2">Projects Deployed</p>
+                            <div className="col-span-2 md:col-span-1">
+                                <h4 className="text-4xl font-extrabold tracking-tight text-white font-mono">180+</h4>
+                                <p className="text-gray-400 text-xs font-medium mt-1">Environments Deployed</p>
                             </div>
                         </div>
                     </motion.div>
                 </motion.div>
             </section>
 
-            {/* 2. VALUES SECTION */}
-            <section className="py-32 px-6 flex justify-center">
+            {/* VALUES SECTION */}
+            <section className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/[0.04]">
                 <motion.div 
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                     variants={containerVariants}
-                    className="max-w-6xl w-full"
                 >
-                    {/* Heading Text */}
-                    <motion.div variants={itemVariants} className="text-center mb-20">
-                        <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Our Values</span>
-                        <h2 className="text-5xl md:text-7xl text-white leading-[1.1] tracking-tight mt-4">
-                            <span className="font-bold">Bold Values </span>
-                            <span className="font-serif italic font-light text-gray-500">Behind</span>
-                            <br />
-                            <span className="font-serif italic font-light text-gray-500">Every </span>
-                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">Breakthrough</span>
+                    <div className="mb-16">
+                        <span className="text-xs uppercase font-bold tracking-widest text-emerald-400 block mb-2">Architectural Philosophy</span>
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+                            Operational Rules We Commit To.
                         </h2>
-                    </motion.div>
+                    </div>
 
-                    {/* Grid Components */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {valuesData.map((item, index) => (
                             <motion.div
                                 key={index}
                                 variants={itemVariants}
-                                whileHover={{ y: -8 }}
-                                className="bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all duration-300 rounded-[2rem] p-10 flex flex-col group cursor-pointer"
+                                className="bg-[#0d0d0d] border border-white/[0.04] hover:border-emerald-500/20 transition-all duration-300 rounded-2xl p-8 flex flex-col group"
                             >
-                                <div className="mb-8 p-4 bg-emerald-500/10 group-hover:bg-emerald-500/20 transition-colors duration-300 rounded-2xl w-fit">
+                                <div className="mb-6 p-3 bg-white/[0.03] border border-white/[0.06] group-hover:bg-emerald-500/[0.06] group-hover:border-emerald-500/20 transition-all duration-300 rounded-xl w-fit">
                                     {item.icon}
                                 </div>
-                                <h3 className="text-2xl font-semibold text-white mb-4">
+                                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors duration-200">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-400 text-base leading-relaxed">
+                                <p className="text-gray-400 text-sm leading-relaxed font-light">
                                     {item.description}
                                 </p>
                             </motion.div>
@@ -149,7 +143,6 @@ export default function About() {
                     </div>
                 </motion.div>
             </section>
-            
         </main>
     );
 }

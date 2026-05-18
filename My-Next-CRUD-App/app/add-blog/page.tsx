@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { PenTool, ChevronDown, Send } from "lucide-react";
+import { Terminal, ChevronDown, FileCode2 } from "lucide-react";
 import { blogDataType } from "../utils/type";
 
 export default function AddBlogForm() {
-    const blogCategory = ["Development", "AI Development", "Advertisement", "Marketing", "Sports"];
+    const blogCategory = ["Development", "AI Infrastructure", "Systems Architecture", "Frontend Performance", "Database Optimization"];
 
     const [blogData, setBlogData] = useState<blogDataType>({
         id: 0,
@@ -18,7 +18,7 @@ export default function AddBlogForm() {
         sortExcerpt: "",
     });
 
-    const [errorBlog, setErrorBlog] = useState<any>({});
+    const [errorBlog, setErrorBlog] = useState<Partial<Record<keyof blogDataType, string>>>({});
     const [allBlog, setAllBlog] = useState<blogDataType[]>([]);
 
     useEffect(() => {
@@ -30,27 +30,29 @@ export default function AddBlogForm() {
     useEffect(() => {
         const storedBlog = localStorage.getItem('blog');
         if (storedBlog) {
-            setAllBlog(JSON.parse(storedBlog));
+            try {
+                setAllBlog(JSON.parse(storedBlog));
+            } catch (e) {
+                console.error("Failed to parse localized logs", e);
+            }
         }
     }, []);
 
-    const onSubmit = (event: any) => {
+    const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        if (!validation()) {
-            return;
-        }
+        if (!validation()) return;
 
         const newBlog = {
             ...blogData,
             id: Date.now()
-        }
+        };
 
         setAllBlog(blog => [...blog, newBlog]);
 
-        toast.success("Blog Added Successfully", {
+        toast.success("Article Dispatched to Local Array", {
             theme: "dark",
-            className: "border border-emerald-500/20 bg-[#121212] text-white",
+            className: "border border-emerald-500/20 bg-[#0d0d0d] text-white font-sans rounded-xl",
         });
 
         setBlogData({
@@ -61,163 +63,145 @@ export default function AddBlogForm() {
             blogTag: "",
             sortExcerpt: "",
         });
-    }
+    };
 
     const validation = () => {
-        const error: any = {};
+        const error: Partial<Record<keyof blogDataType, string>> = {};
 
-        if (!blogData.blogTitle) {
-            error.blogTitle = "Blog Title is required";
+        if (!blogData.blogTitle.trim()) error.blogTitle = "Title context parameter missing.";
+        if (!blogData.category) error.category = "Category allocation required.";
+        if (!blogData.authName.trim()) error.authName = "Author signature verified array missing.";
+        if (!blogData.sortExcerpt.trim()) {
+            error.sortExcerpt = "An excerpt summary is required.";
+        } else if (blogData.sortExcerpt.length > 150) {
+            error.sortExcerpt = "Character overflow. Limit payload to under 150 characters.";
         }
-        if (!blogData.category) {
-            error.category = "Category is required";
-        }
-        if (!blogData.authName) {
-            error.authName = "Author Name is required";
-        }
-        if (!blogData.sortExcerpt) {
-            error.sortExcerpt = "Short Excerpt is required";
-        }
-        if (blogData.sortExcerpt.length > 150) {
-            error.sortExcerpt = "Short Excerpt should be less than 150 characters";
-        }
-        if (!blogData.blogTag) {
-            error.blogTag = "Blog Tag is required";
-        }
+        if (!blogData.blogTag.trim()) error.blogTag = "Indexing tags required.";
 
         setErrorBlog(error);
-
         return Object.keys(error).length === 0;
-    }
+    };
 
     return (
-        <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-24 px-6 selection:bg-emerald-500/30">
+        <main className="min-h-screen bg-[#050505] flex items-center justify-center py-20 px-4 sm:px-6 selection:bg-emerald-500/30 font-sans">
             <motion.div 
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="w-full max-w-4xl bg-[#121212] rounded-[2.5rem] p-8 md:p-14 shadow-2xl border border-white/10 font-sans relative overflow-hidden"
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="w-full max-w-3xl bg-[#0d0d0d] rounded-2xl p-6 sm:p-10 shadow-2xl border border-white/[0.05] relative overflow-hidden"
             >
-                {/* Subtle Glow Effect */}
-                <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.05),transparent_50%)] pointer-events-none" />
+                {/* Background Grid Pattern Accent */}
+                <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/[0.01] blur-[60px] pointer-events-none" />
 
-                <div className="mb-14 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                {/* Header Container */}
+                <div className="mb-10 flex items-center justify-between pb-6 border-b border-white/[0.04]">
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
-                            <span className="w-8 h-[1px] bg-emerald-500/50"></span>
-                            <span className="text-emerald-400 text-xs font-semibold tracking-widest uppercase">
-                                Editor
-                            </span>
+                        <div className="flex items-center gap-2 mb-2">
+                            <Terminal className="w-3.5 h-3.5 text-emerald-400" />
+                            <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-mono">Content Dispatch Node</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl text-white leading-[1.1] tracking-tight">
-                            <span className="font-bold">Draft </span>
-                            <span className="font-serif italic font-light text-gray-500">your </span>
-                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">Story.</span>
+                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                            Draft Technical Story
                         </h2>
-                    </div>
-                    <div className="hidden md:flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                        <PenTool className="text-emerald-400 w-8 h-8" strokeWidth={1.5} />
                     </div>
                 </div>
 
-                <form onSubmit={onSubmit} className="flex flex-col gap-8 relative z-10">
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="flex flex-col gap-3">
-                            <label className="text-sm font-semibold text-gray-300 ml-1">Blog Title *</label>
+                {/* Form Input Matrix */}
+                <form onSubmit={onSubmit} className="flex flex-col gap-6">
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Title Field */}
+                        <div className="flex flex-col gap-2">
+                            <label className="text-xs font-semibold text-gray-400">Blog Title <span className="text-emerald-500">*</span></label>
                             <input
                                 type="text"
-                                name="blogTitle"
-                                onChange={(e) => setBlogData({ ...blogData, blogTitle: e.target.value })}
                                 value={blogData.blogTitle}
-                                placeholder="E.g., The Future of UI Design in 2026"
-                                className={`w-full bg-[#1a1a1a] border ${errorBlog.blogTitle ? 'border-red-500/50' : 'border-white/5'} px-5 py-4 rounded-2xl text-white placeholder-gray-500 focus:bg-[#222] focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300`}
+                                onChange={(e) => setBlogData({ ...blogData, blogTitle: e.target.value })}
+                                placeholder="e.g., Mitigating V8 Memory Leaks"
+                                className={`w-full bg-[#121212] border ${errorBlog.blogTitle ? 'border-red-500/40 focus:border-red-500/50' : 'border-white/[0.06] focus:border-emerald-500/40'} px-4 py-3 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-emerald-500/[0.03] transition-all duration-200`}
                             />
-                            {errorBlog.blogTitle && <span className="text-red-400 text-xs ml-1 font-medium">{errorBlog.blogTitle}</span>}
+                            {errorBlog.blogTitle && <span className="text-red-400 text-[11px] font-mono mt-0.5">{errorBlog.blogTitle}</span>}
                         </div>
 
-                        <div className="flex flex-col gap-3">
-                            <label className="text-sm font-semibold text-gray-300 ml-1">Category *</label>
+                        {/* Category Field */}
+                        <div className="flex flex-col gap-2">
+                            <label className="text-xs font-semibold text-gray-400">System Category <span className="text-emerald-500">*</span></label>
                             <div className="relative">
                                 <select
-                                    name="category"
-                                    onChange={(e) => setBlogData({ ...blogData, category: e.target.value })}
                                     value={blogData.category}
-                                    className={`w-full bg-[#1a1a1a] border ${errorBlog.category ? 'border-red-500/50' : 'border-white/5'} px-5 py-4 rounded-2xl text-white appearance-none focus:bg-[#222] focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 cursor-pointer`}
+                                    onChange={(e) => setBlogData({ ...blogData, category: e.target.value })}
+                                    className={`w-full bg-[#121212] border ${errorBlog.category ? 'border-red-500/40 focus:border-red-500/50' : 'border-white/[0.06] focus:border-emerald-500/40'} px-4 py-3 rounded-xl text-sm text-white appearance-none focus:outline-none focus:ring-4 focus:ring-emerald-500/[0.03] transition-all duration-200 cursor-pointer`}
                                 >
-                                    <option value="" className="bg-[#1a1a1a] text-gray-500">Select a category</option>
+                                    <option value="" className="text-gray-600">Select parameter allocation</option>
                                     {blogCategory.map((category) => (
-                                        <option key={category} value={category} className="bg-[#1a1a1a]">
-                                            {category}
-                                        </option>
+                                        <option key={category} value={category} className="bg-[#0d0d0d]">{category}</option>
                                     ))}
                                 </select>
-                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-emerald-400">
-                                    <ChevronDown className="w-5 h-5" />
+                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                    <ChevronDown className="w-4 h-4" />
                                 </div>
                             </div>
-                            {errorBlog.category && <span className="text-red-400 text-xs ml-1 font-medium">{errorBlog.category}</span>}
+                            {errorBlog.category && <span className="text-red-400 text-[11px] font-mono mt-0.5">{errorBlog.category}</span>}
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="flex flex-col gap-3">
-                            <label className="text-sm font-semibold text-gray-300 ml-1">Author Name *</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Author Field */}
+                        <div className="flex flex-col gap-2">
+                            <label className="text-xs font-semibold text-gray-400">Author Verification Signature <span className="text-emerald-500">*</span></label>
                             <input
                                 type="text"
-                                name="authName"
-                                onChange={(e) => setBlogData({ ...blogData, authName: e.target.value })}
                                 value={blogData.authName}
-                                placeholder="E.g., Darshil Goyani"
-                                className={`w-full bg-[#1a1a1a] border ${errorBlog.authName ? 'border-red-500/50' : 'border-white/5'} px-5 py-4 rounded-2xl text-white placeholder-gray-500 focus:bg-[#222] focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300`}
+                                onChange={(e) => setBlogData({ ...blogData, authName: e.target.value })}
+                                placeholder="Darshil Goyani"
+                                className={`w-full bg-[#121212] border ${errorBlog.authName ? 'border-red-500/40 focus:border-red-500/50' : 'border-white/[0.06] focus:border-emerald-500/40'} px-4 py-3 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-emerald-500/[0.03] transition-all duration-200`}
                             />
-                            {errorBlog.authName && <span className="text-red-400 text-xs ml-1 font-medium">{errorBlog.authName}</span>}
+                            {errorBlog.authName && <span className="text-red-400 text-[11px] font-mono mt-0.5">{errorBlog.authName}</span>}
                         </div>
 
-                        <div className="flex flex-col gap-3">
-                            <label className="text-sm font-semibold text-gray-300 ml-1">Tags (Comma Separated) *</label>
+                        {/* Tags Field */}
+                        <div className="flex flex-col gap-2">
+                            <label className="text-xs font-semibold text-gray-400">Indexing Meta-Tags (Comma Separated) <span className="text-emerald-500">*</span></label>
                             <input
                                 type="text"
-                                name="blogTag"
-                                onChange={(e) => setBlogData({ ...blogData, blogTag: e.target.value })}
                                 value={blogData.blogTag}
-                                placeholder="e.g., frontend, ui-ux, react"
-                                className={`w-full bg-[#1a1a1a] border ${errorBlog.blogTag ? 'border-red-500/50' : 'border-white/5'} px-5 py-4 rounded-2xl text-white placeholder-gray-500 focus:bg-[#222] focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300`}
+                                onChange={(e) => setBlogData({ ...blogData, blogTag: e.target.value })}
+                                placeholder="nextjs, architecture, node"
+                                className={`w-full bg-[#121212] border ${errorBlog.blogTag ? 'border-red-500/40 focus:border-red-500/50' : 'border-white/[0.06] focus:border-emerald-500/40'} px-4 py-3 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-emerald-500/[0.03] transition-all duration-200`}
                             />
-                            {errorBlog.blogTag && <span className="text-red-400 text-xs ml-1 font-medium">{errorBlog.blogTag}</span>}
+                            {errorBlog.blogTag && <span className="text-red-400 text-[11px] font-mono mt-0.5">{errorBlog.blogTag}</span>}
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-3">
-                        <div className="flex justify-between items-end ml-1">
-                            <label className="text-sm font-semibold text-gray-300">Short Excerpt *</label>
-                            <span className={`text-xs ${blogData.sortExcerpt.length > 150 ? 'text-red-400' : 'text-gray-500'}`}>
+                    {/* Excerpt Textarea */}
+                    <div className="flex flex-col gap-2">
+                        <div className="flex justify-between items-center">
+                            <label className="text-xs font-semibold text-gray-400">Short Payload Summary Excerpt <span className="text-emerald-500">*</span></label>
+                            <span className={`text-[10px] font-mono ${blogData.sortExcerpt.length > 150 ? 'text-red-400 font-bold' : 'text-gray-600'}`}>
                                 {blogData.sortExcerpt.length}/150
                             </span>
                         </div>
                         <textarea
-                            name="sortExcerpt"
-                            onChange={(e) => setBlogData({ ...blogData, sortExcerpt: e.target.value })}
                             value={blogData.sortExcerpt}
+                            onChange={(e) => setBlogData({ ...blogData, sortExcerpt: e.target.value })}
                             rows={3}
-                            placeholder="A quick summary of the blog post to hook the reader..."
-                            className={`w-full bg-[#1a1a1a] border ${errorBlog.sortExcerpt ? 'border-red-500/50' : 'border-white/5'} px-5 py-4 rounded-2xl text-white placeholder-gray-500 focus:bg-[#222] focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 resize-none`}
-                        ></textarea>
-                        {errorBlog.sortExcerpt && <span className="text-red-400 text-xs ml-1 font-medium">{errorBlog.sortExcerpt}</span>}
+                            placeholder="Provide a granular overview of your structural narrative analysis context payload..."
+                            className={`w-full bg-[#121212] border ${errorBlog.sortExcerpt ? 'border-red-500/40 focus:border-red-500/50' : 'border-white/[0.06] focus:border-emerald-500/40'} px-4 py-3 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-emerald-500/[0.03] transition-all duration-200 resize-none`}
+                        />
+                        {errorBlog.sortExcerpt && <span className="text-red-400 text-[11px] font-mono mt-0.5">{errorBlog.sortExcerpt}</span>}
                     </div>
 
-                    <div className="mt-6 pt-8 border-t border-white/5 flex justify-end">
-                        <motion.button 
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
+                    {/* Form Footer Action */}
+                    <div className="mt-4 pt-6 border-t border-white/[0.04] flex justify-end">
+                        <button 
                             type="submit" 
-                            className="bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 pl-8 pr-2 py-2 rounded-full flex items-center gap-4 hover:bg-emerald-500 hover:text-white transition-all duration-300 font-medium group"
+                            className="bg-emerald-500 hover:bg-emerald-400 text-[#050505] pl-6 pr-2 py-1.5 rounded-full flex items-center gap-3 transition-all duration-200 text-xs font-semibold group shadow-md shadow-emerald-500/5"
                         >
-                            Publish Story
-                            <div className="bg-emerald-500 text-white group-hover:bg-white group-hover:text-emerald-600 rounded-full p-2.5 transition-colors duration-300">
-                                <Send className="w-4 h-4" />
+                            Publish Component Story
+                            <div className="bg-[#050505] text-emerald-400 group-hover:bg-white group-hover:text-black rounded-full p-2 transition-all duration-200">
+                                <FileCode2 className="w-3.5 h-3.5" />
                             </div>
-                        </motion.button>
+                        </button>
                     </div>
 
                 </form>

@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Edit3, ChevronDown, Save } from "lucide-react";
+import { Edit3, ChevronDown, Save, ArrowLeft } from "lucide-react";
 
 export default function EditFormPage() {
     const { id } = useParams();
@@ -21,7 +21,7 @@ export default function EditFormPage() {
         sortExcerpt: "",
     });
 
-    const [errorBlog, setErrorBlog] = useState<any>({});
+    const [errorBlog, setErrorBlog] = useState<Partial<Record<keyof blogDataType, string>>>({});
 
     useEffect(() => {
         const allBlog: blogDataType[] = JSON.parse(localStorage.getItem('blog') || '[]');
@@ -32,41 +32,42 @@ export default function EditFormPage() {
         }
     }, [id]);
 
-    const validation = () => {
-        const error: any = {};
+    const validation = (): boolean => {
+        const error: Partial<Record<keyof blogDataType, string>> = {};
 
-        if (!blogData.blogTitle) {
+        if (!blogData.blogTitle.trim()) {
             error.blogTitle = "Blog Title is required";
         }
         if (!blogData.category) {
             error.category = "Category is required";
         }
-        if (!blogData.authName) {
+        if (!blogData.authName.trim()) {
             error.authName = "Author Name is required";
         }
-        if (!blogData.sortExcerpt) {
+        if (!blogData.sortExcerpt.trim()) {
             error.sortExcerpt = "Short Excerpt is required";
-        }
-        if (blogData.sortExcerpt.length > 150) {
+        } else if (blogData.sortExcerpt.length > 150) {
             error.sortExcerpt = "Short Excerpt should be less than 150 characters";
         }
-        if (!blogData.blogTag) {
+        if (!blogData.blogTag.trim()) {
             error.blogTag = "Blog Tag is required";
         }
 
         setErrorBlog(error);
-
         return Object.keys(error).length === 0;
-    }
+    };
 
-    const onSubmit = (event: any) => {
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (!validation()) return;
+        if (!validation()) {
+            toast.error("Please fix the validation errors", { theme: "dark" });
+            return;
+        }
 
         let allBlog = JSON.parse(localStorage.getItem('blog') || '[]');
 
-        allBlog = allBlog.map((item: any) => {
+        allBlog = allBlog.map((item: blogDataType) => {
             if (item.id === Number(id)) {
                 return blogData;
             }
@@ -96,12 +97,13 @@ export default function EditFormPage() {
 
                 <div className="mb-14 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
-                            <span className="w-8 h-[1px] bg-emerald-500/50"></span>
-                            <span className="text-emerald-400 text-xs font-semibold tracking-widest uppercase">
-                                Update
-                            </span>
-                        </div>
+                        <button 
+                            type="button" 
+                            onClick={() => router.back()} 
+                            className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-gray-500 hover:text-emerald-400 transition-colors duration-200 mb-4 group"
+                        >
+                            <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" /> Back
+                        </button>
                         <h2 className="text-4xl md:text-5xl text-white leading-[1.1] tracking-tight">
                             <span className="font-bold">Update </span>
                             <span className="font-serif italic font-light text-gray-500">Your </span>
@@ -184,8 +186,8 @@ export default function EditFormPage() {
                     <div className="flex flex-col gap-3">
                         <div className="flex justify-between items-end ml-1">
                             <label className="text-sm font-semibold text-gray-300">Short Excerpt *</label>
-                            <span className={`text-xs ${blogData.sortExcerpt.length > 150 ? 'text-red-400' : 'text-gray-500'}`}>
-                                {blogData.sortExcerpt.length}/150
+                            <span className={`text-xs ${((blogData.sortExcerpt || "").length) > 150 ? 'text-red-400 font-bold' : 'text-gray-500'}`}>
+                                {((blogData.sortExcerpt || "").length)}/150
                             </span>
                         </div>
                         <textarea

@@ -1,176 +1,235 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { LayoutGrid, List, TableProperties, Edit3, Trash2, Calendar, User, Tag } from "lucide-react";
+import { blogDataType } from "../utils/type";
 
 export default function BlogView() {
-
-    const [viewType, setViewType] = useState("grid");
-    const [blogsData, setBlogsData] = useState<any[]>([]);
-
+    const [viewType, setViewType] = useState<"grid" | "list" | "table">("grid");
+    const [blogsData, setBlogsData] = useState<blogDataType[]>([]);
     const router = useRouter();
 
     useEffect(() => {
         const storedBlog = localStorage.getItem("blog");
-
         if (storedBlog) {
-            setBlogsData(JSON.parse(storedBlog));
+            try {
+                setBlogsData(JSON.parse(storedBlog));
+            } catch (e) {
+                console.error("Failed to parse system storage log payload", e);
+            }
         }
     }, []);
 
     const deleteBlog = (id: number) => {
         const updatedBlogs = blogsData.filter(blog => blog.id !== id);
-
         setBlogsData(updatedBlogs);
         localStorage.setItem("blog", JSON.stringify(updatedBlogs));
 
-        toast.success("Blog deleted successfully!");
+        toast.success("Article structural node purged successfully.", {
+            theme: "dark",
+            className: "border border-red-500/20 bg-[#0d0d0d] text-white font-sans rounded-xl",
+        });
     };
 
     return (
-        <section className="min-h-screen bg-[#f4f6fa] py-35 px-4 md:px-8 font-sans">
+        <section className="min-h-screen bg-[#050505] text-[#ededed] py-32 px-4 md:px-8 font-sans selection:bg-emerald-500/30 overflow-x-hidden">
             <div className="max-w-7xl mx-auto w-full">
 
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                {/* CONTROL ACTION BAR HEADER */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6 pb-6 border-b border-white/[0.04]">
                     <div>
-                        <span className="text-indigo-600 text-sm font-bold tracking-widest uppercase mb-2 block">
-                            Manage Content
+                        <span className="text-xs uppercase font-bold tracking-widest text-emerald-400 block mb-2">
+                            Engineered Logs
                         </span>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#12121c] leading-[1.1] tracking-tight">
-                            <span className="font-bold font-sans">All </span>
-                            <span className="font-serif italic font-light text-gray-500">published </span>
-                            <span className="font-bold font-sans">Stories.</span>
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+                            All <span className="font-light italic text-gray-400">published</span> Stories.
                         </h2>
                     </div>
 
-                    <div className="bg-white p-1.5 rounded-full border border-gray-200 flex items-center shadow-sm">
+                    {/* View Switcher Matrix */}
+                    <div className="bg-[#0d0d0d] p-1 rounded-full border border-white/[0.06] flex items-center shadow-inner">
                         <button
                             onClick={() => setViewType("grid")}
-                            className={`p-2.5 rounded-full transition-all duration-300 ${viewType === "grid" ? "bg-[#4f46e5] text-white shadow-md" : "text-gray-500 hover:bg-gray-100"}`}
+                            className={`p-2.5 rounded-full transition-all duration-300 ${viewType === "grid" ? "bg-emerald-500 text-[#050505] shadow-md font-bold" : "text-gray-400 hover:text-white hover:bg-white/[0.02]"}`}
+                            title="Grid Layout"
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            <LayoutGrid className="w-4 h-4" />
                         </button>
                         <button
                             onClick={() => setViewType("list")}
-                            className={`p-2.5 rounded-full transition-all duration-300 ${viewType === "list" ? "bg-[#4f46e5] text-white shadow-md" : "text-gray-500 hover:bg-gray-100"}`}
+                            className={`p-2.5 rounded-full transition-all duration-300 ${viewType === "list" ? "bg-emerald-500 text-[#050505] shadow-md font-bold" : "text-gray-400 hover:text-white hover:bg-white/[0.02]"}`}
+                            title="List Layout"
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            <List className="w-4 h-4" />
                         </button>
                         <button
                             onClick={() => setViewType("table")}
-                            className={`p-2.5 rounded-full transition-all duration-300 ${viewType === "table" ? "bg-[#4f46e5] text-white shadow-md" : "text-gray-500 hover:bg-gray-100"}`}
+                            className={`p-2.5 rounded-full transition-all duration-300 ${viewType === "table" ? "bg-emerald-500 text-[#050505] shadow-md font-bold" : "text-gray-400 hover:text-white hover:bg-white/[0.02]"}`}
+                            title="Table Matrix"
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <TableProperties className="w-4 h-4" />
                         </button>
                     </div>
                 </div>
 
-                {viewType === "grid" && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-                        {blogsData.map((blog, index) => (
-                            <div key={index} className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+                {/* EMPTY CONTENT FALLBACK */}
+                {blogsData.length === 0 && (
+                    <div className="text-center py-20 border border-dashed border-white/[0.05] rounded-3xl bg-[#0d0d0d]/30">
+                        <p className="text-gray-500 text-sm font-mono">No telemetry logs found in local storage cache.</p>
+                    </div>
+                )}
 
-                                <div className="flex justify-between items-start mb-6">
-                                    <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{blog.category}</span>
-                                    <span className="text-xs text-gray-400 font-medium">{blog.date}</span>
+                {/* GRID VIEW MODALITY */}
+                {viewType === "grid" && blogsData.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {blogsData.map((blog) => (
+                            <motion.div 
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                key={blog.id} 
+                                className="bg-[#0d0d0d] rounded-3xl p-8 border border-white/[0.05] hover:border-emerald-500/25 transition-all duration-300 flex flex-col group relative overflow-hidden"
+                            >
+                                <div className="flex justify-between items-center mb-6">
+                                    <span className="bg-white/[0.03] border border-white/[0.06] text-emerald-400 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider uppercase">
+                                        {blog.category}
+                                    </span>
+                                    <span className="text-[11px] text-gray-500 font-mono flex items-center gap-1.5">
+                                        <Calendar className="w-3 h-3 text-cyan-500" /> {blog.blogTag ? blog.blogTag.split(',')[0] : 'System'}
+                                    </span>
                                 </div>
 
-                                <h3 className="text-2xl font-bold text-[#12121c] mb-4 leading-snug group-hover:text-indigo-600 transition-colors">{blog.blogTitle}</h3>
-                                <p className="text-gray-500 text-sm mb-8 flex-grow leading-relaxed">{blog.sortExcerpt}</p>
+                                <h3 className="text-xl font-bold text-white mb-4 leading-snug group-hover:text-emerald-400 transition-colors duration-200">
+                                    {blog.blogTitle}
+                                </h3>
+                                <p className="text-gray-400 text-sm mb-8 flex-grow leading-relaxed font-light">
+                                    {blog.sortExcerpt}
+                                </p>
 
-                                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                                    <span className="text-sm font-semibold text-[#12121c]">{blog.authName}</span>
-                                    <div className="flex gap-2">
-                                        <button onClick={() => {
-                                            router.push(`/editBlog/${blog.id}`);
-                                        }} className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-all" title="Edit">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                <div className="flex justify-between items-center pt-5 border-t border-white/[0.04]">
+                                    <span className="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                                        <User className="w-3.5 h-3.5 text-gray-500" /> {blog.authName}
+                                    </span>
+                                    <div className="flex gap-1">
+                                        <button 
+                                            onClick={() => router.push(`/editBlog/${blog.id}`)} 
+                                            className="p-2 text-gray-500 hover:text-emerald-400 hover:bg-emerald-500/[0.05] rounded-xl transition-all duration-200" 
+                                            title="Edit Log"
+                                        >
+                                            <Edit3 className="w-4 h-4" />
                                         </button>
-                                        <button onClick={() => {
-                                            deleteBlog(blog.id)
-                                        }} className="p-2 cursor-pointer text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all" title="Delete">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        <button 
+                                            onClick={() => deleteBlog(blog.id)} 
+                                            className="p-2 text-gray-500 hover:text-red-400 hover:bg-red-500/[0.05] rounded-xl transition-all duration-200" 
+                                            title="Purge Log"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 )}
 
-                {viewType === "list" && (
-                    <div className="flex flex-col gap-5 animate-fade-in">
-                        {blogsData.map((blog, index) => (
-                            <div key={index} className="bg-white rounded-[2rem] p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row justify-between gap-6 group">
-
+                {/* LIST VIEW MODALITY */}
+                {viewType === "list" && blogsData.length > 0 && (
+                    <div className="flex flex-col gap-4">
+                        {blogsData.map((blog) => (
+                            <motion.div 
+                                initial={{ opacity: 0, x: -5 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                key={blog.id} 
+                                className="bg-[#0d0d0d] rounded-2xl p-6 md:p-8 border border-white/[0.04] hover:border-emerald-500/20 transition-all duration-300 flex flex-col md:flex-row justify-between gap-6 group"
+                            >
                                 <div className="flex-grow">
                                     <div className="flex items-center gap-4 mb-3">
-                                        <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{blog.category}</span>
-                                        <span className="text-xs text-gray-400 font-medium">{blog.date}</span>
+                                        <span className="bg-white/[0.03] border border-white/[0.05] text-emerald-400 px-2.5 py-0.5 rounded-md text-[10px] font-mono uppercase tracking-wider">
+                                            {blog.category}
+                                        </span>
+                                        <span className="text-[11px] text-gray-500 font-mono tracking-tight">{blog.blogTag}</span>
                                     </div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-[#12121c] mb-3 leading-tight group-hover:text-indigo-600 transition-colors">{blog.blogTitle}</h3>
-                                    <p className="text-gray-500 text-sm max-w-3xl leading-relaxed">{blog.sortExcerpt}</p>
+                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-emerald-400 transition-colors duration-200">
+                                        {blog.blogTitle}
+                                    </h3>
+                                    <p className="text-gray-400 text-sm max-w-4xl leading-relaxed font-light">
+                                        {blog.sortExcerpt}
+                                    </p>
                                 </div>
 
-                                <div className="flex md:flex-col justify-between items-end md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-gray-100 md:pl-6 mt-4 md:mt-0">
-                                    <span className="text-sm font-semibold text-[#12121c] text-right w-full">{blog.authName}</span>
+                                <div className="flex md:flex-col justify-between items-end md:min-w-[160px] pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-white/[0.04] md:pl-6 mt-2 md:mt-0">
+                                    <span className="text-xs font-semibold text-gray-300 text-right w-full block font-mono">
+                                        // {blog.authName}
+                                    </span>
 
                                     <div className="flex gap-2 md:mt-auto">
-                                        <button onClick={() => {
-                                            router.push(`/editBlog/${blog.id}`);
-                                        }} className="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-full transition-colors flex items-center gap-2">
-                                            Edit
+                                        <button 
+                                            onClick={() => router.push(`/editBlog/${blog.id}`)} 
+                                            className="px-4 py-2 text-xs font-medium text-emerald-400 bg-emerald-500/[0.04] hover:bg-emerald-500/10 border border-emerald-500/10 rounded-full transition-all duration-200"
+                                        >
+                                            Edit Node
                                         </button>
-                                        <button onClick={() => {
-                                            deleteBlog(blog.id)
-                                        }} className="px-4 py-2 cursor-pointer text-sm font-medium text-red-500 bg-red-50 hover:bg-red-100 rounded-full transition-colors flex items-center gap-2">
-                                            Delete
+                                        <button 
+                                            onClick={() => deleteBlog(blog.id)} 
+                                            className="px-4 py-2 text-xs font-medium text-red-400 bg-red-500/[0.04] hover:bg-red-500/10 border border-red-500/10 rounded-full transition-all duration-200"
+                                        >
+                                            Purge
                                         </button>
                                     </div>
                                 </div>
-
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 )}
 
-                {viewType === "table" && (
-                    <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden animate-fade-in">
+                {/* TABLE MATRIX VIEW MODALITY */}
+                {viewType === "table" && blogsData.length > 0 && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="bg-[#0d0d0d] rounded-2xl border border-white/[0.05] overflow-hidden"
+                    >
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="bg-[#f4f6fa] text-[#12121c] text-xs font-bold uppercase tracking-widest">
-                                        <th className="px-6 py-5 rounded-tl-[2rem]">Title</th>
-                                        <th className="px-6 py-5">Category</th>
-                                        <th className="px-6 py-5">Author</th>
-                                        <th className="px-6 py-5">Date</th>
-                                        <th className="px-6 py-5 text-right rounded-tr-[2rem]">Actions</th>
+                                    <tr className="bg-white/[0.02] text-gray-400 text-[11px] font-mono uppercase tracking-widest border-b border-white/[0.04]">
+                                        <th className="px-6 py-4.5">Title Stream</th>
+                                        <th className="px-6 py-4.5">System Allocation</th>
+                                        <th className="px-6 py-4.5">Author Index</th>
+                                        <th className="px-6 py-4.5 text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="text-sm text-gray-600 divide-y divide-gray-100">
-                                    {blogsData.map((blog, index) => (
-                                        <tr key={index} className="hover:bg-gray-50 transition-colors duration-200 group">
-                                            <td className="px-6 py-5 font-semibold text-[#12121c] group-hover:text-indigo-600 transition-colors max-w-xs truncate">
+                                <tbody className="text-sm text-gray-400 divide-y divide-white/[0.03]">
+                                    {blogsData.map((blog) => (
+                                        <tr key={blog.id} className="hover:bg-white/[0.01] transition-colors duration-150 group">
+                                            <td className="px-6 py-4 font-medium text-white group-hover:text-emerald-400 transition-colors duration-200 max-w-xs truncate">
                                                 {blog.blogTitle}
                                             </td>
-                                            <td className="px-6 py-5">
-                                                <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
+                                            <td className="px-6 py-4">
+                                                <span className="text-gray-300 font-mono text-xs">
                                                     {blog.category}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-5 font-medium">{blog.authName}</td>
-                                            <td className="px-6 py-5">{blog.date}</td>
-                                            <td className="px-6 py-5">
+                                            <td className="px-6 py-4 text-xs font-mono text-gray-500">
+                                                {blog.authName}
+                                            </td>
+                                            <td className="px-6 py-4">
                                                 <div className="flex justify-end gap-3">
-                                                    <button onClick={() => {
-                                                        router.push(`/editBlog/${blog.id}`);
-                                                    }} className="text-gray-400 hover:text-indigo-600 transition-colors" title="Edit">
-                                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                                    <button 
+                                                        onClick={() => router.push(`/editBlog/${blog.id}`)} 
+                                                        className="text-gray-500 hover:text-emerald-400 transition-colors duration-200" 
+                                                        title="Edit Matrix"
+                                                    >
+                                                        <Edit3 className="w-4 h-4" />
                                                     </button>
-                                                    <button onClick={() => {
-                                                        deleteBlog(blog.id)
-                                                    }} className="text-gray-400 hover:text-red-500 cursor-pointer transition-colors" title="Delete">
-                                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                    <button 
+                                                        onClick={() => deleteBlog(blog.id)} 
+                                                        className="text-gray-500 hover:text-red-400 transition-colors duration-200" 
+                                                        title="Purge Matrix"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
                                                     </button>
                                                 </div>
                                             </td>
@@ -179,7 +238,7 @@ export default function BlogView() {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
 
             </div>
